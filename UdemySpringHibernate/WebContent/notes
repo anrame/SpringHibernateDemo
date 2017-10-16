@@ -1,0 +1,72 @@
+1. create table customer in database
+CREATE TABLE customer (
+  id number(11) NOT NULL,
+  first_name varchar2(15),
+  last_name varchar(45) ,
+  email varchar(45) ,
+  PRIMARY KEY (id)
+)
+
+2. Copy web.xml and spring config files to WEB-INF folder
+3. Create WEB-INF views folder
+4. Copy jar files to web-inf\lib folder
+5. Create jdbc.properties file in WEB-INF folder
+5. Create hibernate.cfg.xml in src folder
+
+Test your App-Step1-Check if Controller is working
+--------------------------------------------------
+1. create index.jsp with showAll link
+2. this link should take us to list-customers.jsp
+
+Test ViewAll with real data
+---------------------------
+1. Create Customer bean class
+Use @Entitty,@Table,@Id,@Column annotations
+Use @GeneratedValue(strategy=GenerationType.IDENTITY) for generating id
+In hibernate.cfg.xml do the mapping
+
+Flow
+----
+Web browser -->Customer Controller-->Customer DAO --> Database
+Customer Controller-->JSP Page
+CustomerDAO --> SessionFactory --> DataSource --> Database
+
+1.create Customer.java
+2.create CustomerDAO and CustomerDAOImpl
+3.create CustomerController
+4.create list-customers.jsp
+
+Define DAOInterface
+Define DAOImplementation -- 
+-->this class should be annotated with @Repository
+-->Inside the class SessionFactory should be autowired
+-->the method should be annotated with @Transactional
+
+The CustomerController should be injected with DAO
+
+Adding Service Layer
+--------------------
+browser-->Controller-->Service-->DAO-->Database
+Controller--JSP
+
+1.Add @Services to Services Implementation class
+2.Add Service interface
+3.Add Service implementation class
+4.In Service implementation class autowire dao class
+5.In service method add @Transactional to mark transaction begin and end
+6. In Controller, instead of DAO autowire Service and inivoke business method
+
+
+Add Customer
+-------------
+Web browser --> Controller --> Service --> DAO -- Database
+Controller --JSP
+
+1. Create Add Customer button in list-customers.jsp
+2. Create Form to capture data
+3. On Submit, the data has to added to the database and the page should display the update data
+
+
+
+
+
